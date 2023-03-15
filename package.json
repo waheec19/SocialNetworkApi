@@ -1,0 +1,32 @@
+{
+  "name": "companimizer-api",
+  "version": "1.0.0",
+  "description": "Social Media API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index",
+    "seed": "node utils/seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umairkhalid/Companimizer-API.git"
+  },
+  "keywords": [],
+  "author": "Umair Khalid",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/umairkhalid/Companimizer-API/issues"
+  },
+  "homepage": "https://github.com/umairkhalid/Companimizer-API#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "moment": "^2.29.3",
+    "mongodb": "^4.7.0",
+    "mongoose": "^6.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}
