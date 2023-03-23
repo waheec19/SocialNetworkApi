@@ -1,10 +1,10 @@
 const { User, Thought } = require('../models');
 
 module.exports = {
-  getUsers(req, res) {
+  getAllUser(req, res) {
     User.find({})
       .populate({ path: "thoughts", select: "-__v" })
-      .populate({ path: "friends", select: "-__v" })
+      .populate({ path: "buddy", select: "-__v" })
       .sort({_id: -1})
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
@@ -12,7 +12,7 @@ module.exports = {
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .populate({ path: "thoughts", select: "-__v" })
-      .populate({ path: "friends", select: "-__v" })
+      .populate({ path: "buddy", select: "-__v" })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user with that ID" })
@@ -26,7 +26,7 @@ module.exports = {
       });
   },
   createUser(req, res) {
-    console.log('You are adding a User!');
+    console.log('You added a User!');
     console.log(req.body);
     User.create(req.body)
       .then(dbUserData => res.json(dbUserData))
@@ -41,7 +41,7 @@ module.exports = {
     )
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No user with this id!' })
+          ? res.status(404).json({ message: 'No user found using this id!' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
@@ -56,8 +56,8 @@ module.exports = {
       .then(() => res.json({ message: 'User has been deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
-  addFriend(req, res) {
-    console.log('You are adding a friend');
+  addBuddy(req, res) {
+    console.log('You are adding a buddy ');
     console.log(req.body);
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -66,12 +66,12 @@ module.exports = {
     )
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No user with this id!' })
+          ? res.status(404).json({ message: 'No user found using this id!' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
-  removeFriend(req, res) {
+  removeBuddy(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { $pull: { friends: req.params.friendId } },

@@ -11,12 +11,12 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-  getThoughtById(req, res) {
+  getThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .populate({ path: "reactions", select: "-__v" })
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: "No thought with that ID" })
+          ? res.status(404).json({ message: "thought with that ID not found" })
           : res.json({
               thought,
             })
@@ -27,7 +27,7 @@ module.exports = {
       });
   },
   createThought(req, res) {
-    console.log("You are adding a thought");
+    console.log("adding a thought");
     console.log(req.body);
     Thought.create(req.body)
       .then((thought) =>
@@ -41,8 +41,8 @@ module.exports = {
         !user
           ? res
               .status(404)
-              .json({ message: "Thought created but no user with this id!" })
-          : res.json({ message: "Thought sucessfully created!" })
+              .json({ message: "created but user with this id not found!" })
+          : res.json({ message: "Thought created!" })
       )
       .catch((err) => res.status(500).json(err));
   },
@@ -55,7 +55,7 @@ module.exports = {
       .populate({ path: "reactions", select: "-__v" })
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: "No thought with this id!" })
+          ? res.status(404).json({ message: "thought with this id not found!" })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
@@ -67,7 +67,7 @@ module.exports = {
           ? res.status(404).json({ message: "No Thought with that ID" })
           : User.deleteMany({ _id: { $in: thought.thoughts } })
       )
-      .then(() => res.json({ message: "Thought has been deleted!" }))
+      .then(() => res.json({ message: "Thought deleted!" }))
       .catch((err) => res.status(500).json(err));
   },
   addReaction(req, res) {

@@ -39,47 +39,34 @@ const email = [
   ];
   
   const users = [
-    'Ben',
-    'Benjamin',
-    'Aaron',
-    'Aiden',
-    'Aaron',
-    'Abbas',
-    'Abdallah',
-    'Abdalroof',
-    'Abdihakim',
-    'Abdirahman',
-    'Abdisalam',
-    'Abdul',
-    'Abdul-Aziz',
-    'Abdulbasir',
-    'Abdulkadir',
-    'Zhi',
-    'Zhong',
-    'Zhuo',
-    'Zi',
-    'Zidane',
-    'Zijie',
-    'Zinedine',
-    ``,
+  'andrew',
+  'james',
+  'john',
+  'phil',
+  'bart',
+  'matt',
+  'tom',
+  'simon',
+  'james',
+  'jude',
   ];
   
 
-  const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const getRandArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-  const getRandomName = () =>
-    `${getRandomArrItem(users)}`;
+  const getRandName = () =>
+    `${getRandArrItem(users)}`;
 
-  const getRandomEmail = () =>
+  const getRandEmail = () =>
     `${getRandomArrItem(email)}`;
 
   
-  const getRandomThoughts = (int) => {
+  const getRandThoughts = (int) => {
     let results = [];
     for (let i = 0; i < int; i++) {
       results.push({
-        thoughtText: getRandomArrItem(descriptionsBodies),
-        username: getRandomName(),
+        thoughtText: getRandArrItem(descriptionsBodies),
+        username: getRandName(),
         reactions: [...getThoughtResponses(3)],
       });
     }
@@ -93,11 +80,11 @@ const email = [
     let results = [];
     for (let i = 0; i < int; i++) {
       results.push({
-        reactionBody: getRandomArrItem(possibleResponses),
-        username: getRandomName(),
+        reactionBody: getRandArrItem(possibleResponses),
+        username: getRandName(),
       });
     }
     return results;
   };
   
-  module.exports = { getRandomName, getRandomEmail, getRandomThoughts };np
+  module.exports = { getRandName, getRandEmail, getRandThoughts };np
